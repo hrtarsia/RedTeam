@@ -1,9 +1,17 @@
 Control machine
-  1.) Download all the files the git repo
+  1.) Download all the files from the git repo into the same directory
     a.) Edit inventory.yml so that "ansible_host=100.64.2.55" is replaced with the target windows IP
     b.) Edit inventory.yml so that "ansible_user=Administrator" is replaced with the target windows username
     c.) Edit inventory.yml so that "ansible_password=Administrator" is replaced with the target windows password
     d.) Edit keylogger_playbook.yml so the "username:" and "password:" are correct
-    e.) 
+    e.) Edit keylogger_playbook.yml so the filepath from where your keylogger.py stored on the control machine is correct
+    f.) Edit keylogger_playbook.yml so the filepath for the destination on your windows machine makes sense
+    g.) Edit keylogger.py so the "log_file_path" makes sense on your windows machine
   2.) Make sure python is installed
-  3.) Pip install pynput
+  4.) download ansible
+
+Windows machine
+  1.) Download python
+  2.) download ansible
+  3.) pip install pynput
+  
