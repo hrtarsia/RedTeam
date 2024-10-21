@@ -1,0 +1,9 @@
+Control machine
+  1.) Download all the files the git repo
+    a.) Edit inventory.yml so that "ansible_host=100.64.2.55" is replaced with the target windows IP
+    b.) Edit inventory.yml so that "ansible_user=Administrator" is replaced with the target windows username
+    c.) Edit inventory.yml so that "ansible_password=Administrator" is replaced with the target windows password
+    d.) Edit keylogger_playbook.yml so the "username:" and "password:" are correct
+    e.) 
+  2.) Make sure python is installed
+  3.) Pip install pynput
