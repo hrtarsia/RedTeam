@@ -14,4 +14,13 @@ Windows machine
   1.) Download python
   2.) download ansible
   3.) pip install pynput
+
+Running Program
+  1.) The only thing you need to do after you edit all the files to your liking is run "sudo ansible-playbook -i inventory.yml
+      main_playbook.yml --verbose".
+  2.) wait about 15 seconds and a popup should come up on the windows machine. 
+  3.) click ok and type away anywhere inside the windows machine. Try to create a phrase that you can later read
+  4.) When you are done typing click "esc" on your keyboard to stop the program, another popup should appear.
+  5.) wait a little longer (about 1-1.5 minutes) and if you look at the control machine you will see what you typed while the
+      program was running!
   
