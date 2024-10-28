@@ -1,0 +1,86 @@
+all:
+  vars:
+    default_pass: Changeme.B00!
+    ansible_user: USERNAME
+    ansible_password: PASSWORD
+    domain_name: reallyscarry.local
+  children:
+    win:
+      vars:
+        ansible_connection: winrm
+        ansible_winrm_server_cert_validation: ignore
+        ansible_winrm_transport: ntlm
+        ansible_winrm_port: 5985
+      children:
+        dc:
+          vars:
+            domain_users:
+              - ZodiacKiller
+              - JackTheRipper
+              - JasonVorhees
+              - Pennywise
+              - FreddyKrueger
+              - Annabelle
+      - MichealMyers
+            domain_admins:
+              - ZachPrice
+              - Chucky
+          hosts:
+            10.1.0.4:
+            10.2.0.4:
+        smb:
+          hosts:
+            10.1.0.3:
+            10.2.0.3:
+        icmp:
+          vars:
+            ansible_winrm_transport: ntlm
+            ansible_winrm_port: 5985
+          hosts:
+            10.1.0.15:
+            10.2.0.15:
+    
+    lin:
+      vars:
+        ansible_connection: ssh
+        ansible_sudo_pass: PASS
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+      children:
+        docker:
+          hosts:
+            10.1.0.14:
+            10.2.0.14:
+        sql:
+          hosts:
+            10.1.0.13:
+            10.2.0.13:
+        apache:
+          hosts:
+            10.1.0.12:
+            10.2.0.12:
+        ssh:
+          hosts:
+            10.1.0.11:
+            10.2.0.11:
+    teamOne:
+      vars:
+        team_number: '1'
+      hosts:
+        10.1.0.3:
+        10.1.0.4:
+        10.1.0.11:
+        10.1.0.12:
+        10.1.0.13:
+        10.1.0.14:
+        10.1.0.15:
+    teamTwo:
+      vars:
+        team_number: '2'
+      hosts:
+        10.2.0.3:
+        10.2.0.4:
+        10.2.0.11:
+        10.2.0.12:
+        10.2.0.13:
+        10.2.0.14:
+        10.2.0.15:
