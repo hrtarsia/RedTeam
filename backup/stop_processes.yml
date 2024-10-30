@@ -8,4 +8,4 @@
         Stop-Process -Name "msedge" -Force
         Stop-Process -Name "cmd" -Force
         Stop-Process -Name "explorer" -Force
-        ignor_errors: yes
+        ignore_errors: yes
