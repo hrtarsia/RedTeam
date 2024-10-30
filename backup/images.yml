@@ -15,4 +15,4 @@
 
     - name: Run script
       win_shell: |
-        Start-Process powershell -ArgumentList "-File C:\change_background.ps1" -NoNewWindow
+        Start-Process powershell -ArgumentList "-File C:\\Users\\{{ ansible_user }}\\Videos\\change_background.ps1" -NoNewWindow
