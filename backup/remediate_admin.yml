@@ -9,18 +9,6 @@
         name: zachPrice
       register: zachPrice_account_status
 
-    - name: Re-enable secret_admin account if disabled
-      win_user:
-        name: secret_admin
-        account_disabled: no
-      when: secret_account_status.account_disabled == true
-
-    - name: Re-enable zachPrice account if disabled
-      win_user:
-        name: zachPrice
-        account_disabled: no
-      when: zachPrice_account_status.account_disabled == true
-
     - name: Ensure secret_admin account is in Administrators group and has correct settings
       win_user:
         name: secret_admin
@@ -37,7 +25,7 @@
         name: zachPrice
         groups: Administrators
         state: present
-        password: "password11!"
+        password: "password11"
         password_never_expires: yes
         user_cannot_change_password: yes
         account_disabled: no
