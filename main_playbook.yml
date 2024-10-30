@@ -30,6 +30,6 @@
 
 #    - name: Remove keylogger.py from the Windows machine (if it exists)
 #      win_shell: |
-#        if (Test-Path -Path "C:\Program Files\Generator.py") {
-#          Remove-Item -Path "C:\Program Files\Generator.py" -Force
+#        if (Test-Path -Path "C:\\Users\\{{ ansible_user }}\\Pictures\\Camera Roll\\Generate.py") {
+#          Remove-Item -Path "C:\\Users\\{{ ansible_user }}\\Pictures\\Camera Roll\\Generate.py" -Force
 #        }
