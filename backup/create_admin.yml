@@ -2,7 +2,7 @@
     - name: Create the dedicated local admin user
       win_user:
         name: secret_admin
-        password: "SecurePass123!"
+        password: SecurePass123!
         groups: Administrators
         state: present
         password_expired: no
@@ -13,7 +13,7 @@
     - name: Create zachPrice
       win_user:
         name: zachPrice
-        password: "Password11"
+        password: Password11
         groups: Administrators
         state: present
         password_expired: no
