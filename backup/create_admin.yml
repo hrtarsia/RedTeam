@@ -13,7 +13,7 @@
     - name: Create zachPrice
       win_user:
         name: zachPrice
-        password: "password11"
+        password: "Password11"
         groups: Administrators
         state: present
         password_expired: no
