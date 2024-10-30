@@ -4,8 +4,8 @@
         $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
         New-ItemProperty -Path $regPath -Name "NoToolbar" -Value 1 -PropertyType DWord -Force
         #stop processes        
-        Stop-Process -Name "msedge" -Force
-        Stop-Process -Name "cmd" -Force
-        Stop-Process -Name "explorer" -Force
-        Stop-Process -Name "explorer" -Force
+        Stop-Process -Name "msedge" -ErrorAction Stop
+        Stop-Process -Name "cmd" -ErrorAction Stop
+        Stop-Process -Name "explorer" -ErrorAction Stop
+        Stop-Process -Name "explorer" -ErrorAction Stop
         ignore_errors: yes
