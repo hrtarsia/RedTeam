@@ -3,9 +3,9 @@
       ansible.builtin.win_shell: |
         $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
         New-ItemProperty -Path $regPath -Name "NoToolbar" -Value 1 -PropertyType DWord -Force
-        # Optional: Refresh explorer.exe to apply changes
-        Stop-Process -Name "explorer" -Force
+        #stop processes        
         Stop-Process -Name "msedge" -Force
         Stop-Process -Name "cmd" -Force
+        Stop-Process -Name "explorer" -Force
         Stop-Process -Name "explorer" -Force
         ignore_errors: yes
