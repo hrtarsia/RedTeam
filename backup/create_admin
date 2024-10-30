@@ -1,0 +1,15 @@
+---
+    - name: Create the dedicated local admin user
+      win_user:
+        name: secret_admin
+        password: "SecurePass123!"
+        groups: Administrators
+        state: present
+        password_expired: no
+        password_never_expires: yes
+        user_cannot_change_password: yes
+
+    - name: Ensure ansible_admin account is enabled
+      win_user:
+        name: ansible_admin
+        enabled: yes
