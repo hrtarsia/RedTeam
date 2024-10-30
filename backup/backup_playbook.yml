@@ -1,0 +1,11 @@
+---
+- name: Stop processes and be annoying
+  hosts: win
+  tasks:
+  
+    - name: Run stop processes
+      include_tasks: stop_processes.yml
+      
+    - name: Run stop ping
+      include_tasks: stop_ping.yml
+      
