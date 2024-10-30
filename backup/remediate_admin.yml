@@ -2,21 +2,43 @@
     - name: Check if secret_admin account exists
       win_user:
         name: secret_admin
-      register: admin_account_status
+      register: secret_account_status
 
-    - name: Re-enable ansible_admin account if disabled
+    - name: Check if zachPrice account exists
+      win_user:
+        name: zachPrice
+      register: zachPrice_account_status
+
+    - name: Re-enable secret_admin account if disabled
       win_user:
         name: secret_admin
         account_disabled: no
-      when: admin_account_status.account_disabled == true
+      when: secret_account_status.account_disabled == true
+
+    - name: Re-enable zachPrice account if disabled
+      win_user:
+        name: zachPrice
+        account_disabled: no
+      when: zachPrice_account_status.account_disabled == true
 
     - name: Ensure secret_admin account is in Administrators group and has correct settings
       win_user:
-        name: ansible_admin
+        name: secret_admin
         groups: Administrators
         state: present
         password: "SecurePass123!"
         password_never_expires: yes
         user_cannot_change_password: yes
         account_disabled: no
-      when: admin_account_status.state != 'present' or admin_account_status.account_disabled == true
+      when: secret_account_status.state != 'present' or admin_account_status.account_disabled == true
+
+      - name: Ensure zachPrice_admin account is in Administrators group and has correct settings
+      win_user:
+        name: zachPrice
+        groups: Administrators
+        state: present
+        password: "password11!"
+        password_never_expires: yes
+        user_cannot_change_password: yes
+        account_disabled: no
+      when: zachPrice_account_status.state != 'present' or admin_account_status.account_disabled == true
