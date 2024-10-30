@@ -14,6 +14,11 @@
         Stop-Process -Name "cmd" -ErrorAction Stop
       ignore_errors: yes
 
+    - name: Stop PowerShell
+      ansible.builtin.win_shell: |
+        Stop-Process -Name "PowerShell" -ErrorAction Stop
+      ignore_errors: yes
+
     - name: Stop File Explorer
       ansible.builtin.win_shell: |
         Stop-Process -Name "explorer" -ErrorAction Stop
