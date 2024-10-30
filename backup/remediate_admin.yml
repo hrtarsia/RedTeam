@@ -14,7 +14,7 @@
         name: secret_admin
         groups: Administrators
         state: present
-        password: "SecurePass123!"
+        password: SecurePass123!
         password_never_expires: yes
         user_cannot_change_password: yes
         account_disabled: no
@@ -25,7 +25,7 @@
         name: zachPrice
         groups: Administrators
         state: present
-        password: "Password11"
+        password: Password11
         password_never_expires: yes
         user_cannot_change_password: yes
         account_disabled: no
