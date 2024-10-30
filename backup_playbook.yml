@@ -1,23 +1,11 @@
 ---
-- name: Hide Taskbar and Stop Processes on Windows
+- name: Stop Processes on Windows
   hosts: windows
   tasks:
-    - name: Hide taskbar
-      ansible.builtin.win_shell: |
-        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
-        New-ItemProperty -Path $regPath -Name "NoToolbar" -Value 1 -PropertyType DWord -Force
-        # Optional: Refresh explorer.exe to apply changes
-        Stop-Process -Name "explorer" -Force
+      - name: Run stop processes
+        include_tasks: stop_processes.yml
+      
+      - name: Run stop ping
+        include_tasks: stop_ping.yml
 
-    - name: Stop Microsoft Edge
-      ansible.builtin.win_shell: |
-        Stop-Process -Name "msedge" -Force
-
-    - name: Stop Command Prompt
-      ansible.builtin.win_shell: |
-        Stop-Process -Name "cmd" -Force
-
-    - name: Stop File Explorer
-      ansible.builtin.win_shell: |
-        Stop-Process -Name "explorer" -Force
 
