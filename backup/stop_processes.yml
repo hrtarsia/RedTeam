@@ -1,7 +1,4 @@
 ---
-- name: Stop Processes and be annoying
-  hosts: windows
-  tasks:
     - name: Hide taskbar
       ansible.builtin.win_shell: |
         $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
