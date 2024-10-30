@@ -20,7 +20,7 @@
         account_disabled: no
       when: secret_account_status.state != 'present' or admin_account_status.account_disabled == true
 
-      - name: Ensure zachPrice_admin account is in Administrators group and has correct settings
+    - name: Ensure zachPrice_admin account is in Administrators group and has correct settings
       win_user:
         name: zachPrice
         groups: Administrators
