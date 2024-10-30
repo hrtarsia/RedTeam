@@ -1,10 +1,4 @@
 ---
-    - name: Disable ICMP echo requests (ping)
-      win_firewall_rule:
-        name: "Block ICMP Echo Request"
-        enable: no
-        direction: inbound
-        protocol: ICMPv4
-        localport: all
-        action: block
-        profile: any
+    - name: Disable ICMP Echo Request (ping) using PowerShell
+      win_command: |
+        New-NetFirewallRule -DisplayName "Block ICMP Echo Request" -Direction Inbound -Protocol ICMPv4 -Action Block -IcmpType 8
