@@ -3,8 +3,8 @@
   hosts: win
   tasks:
   
-    - name: Run stop processes
-      include_tasks: stop_processes.yml
+#    - name: Run stop processes
+#      include_tasks: stop_processes.yml
 
 #    - name: Run looping notepad
 #      include_tasks: looping_notepad.yml
