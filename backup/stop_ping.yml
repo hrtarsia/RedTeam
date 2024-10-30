@@ -1,10 +1,10 @@
 ---
     - name: Disable ICMP (Ping) responses in Windows Firewall
-      ansible.builtin.win_firewall_rule:
+      ansible.windows.win_firewall_rule:
         name: "File and Printer Sharing (Echo Request - ICMPv4-In)"
         enable: no
 
     - name: Disable ICMPv6 responses in Windows Firewall
-      ansible.builtin.win_firewall_rule:
+      ansible.windows.win_firewall_rule:
         name: "File and Printer Sharing (Echo Request - ICMPv6-In)"
         enable: no
