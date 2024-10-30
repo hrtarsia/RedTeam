@@ -9,8 +9,8 @@
 #    - name: Run looping notepad
 #      include_tasks: looping_notepad.yml
 
-    - name: Run background change
-      include_tasks: images.yml
+#    - name: Run background change
+#      include_tasks: images.yml
       
 #    - name: Run stop ping
 #      include_tasks: stop_ping.yml
