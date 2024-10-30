@@ -1,0 +1,18 @@
+---
+    - name: change the background
+      win_copy:
+        content: |
+          $wallpapers = @("C:\\Users\\{{ ansible_user }}\\Pictures\\hallow1.jfif", "C:\\Users\\{{ ansible_user }}\\Pictures\\hallow2.jfif", "C:\\Users\\{{ ansible_user }}\\Pictures\\hallow3.jfif")
+          while ($true) {
+              foreach ($wp in $wallpapers) {
+                  Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name wallpaper -Value $wp
+                  RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters
+                  Start-Sleep -Seconds 10
+              }
+          }
+        dest: C:\\Users\\{{ ansible_user }}\\Videos\\change_background.ps1
+        mode: '0755'
+
+    - name: Run script
+      win_shell: |
+        Start-Process powershell -ArgumentList "-File C:\change_background.ps1" -NoNewWindow
