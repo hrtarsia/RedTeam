@@ -1,0 +1,15 @@
+    - name: Check if ansible_admin account exists and is enabled
+      win_user:
+        name: secret_admin
+      register: admin_account_status
+
+    - name: Re-create ansible_admin account if missing
+      win_user:
+        name: secret_admin
+        password: "SecurePass123!"   # Replace with the same secure password
+        groups: Administrators
+        state: present
+        enabled: yes
+        password_never_expires: yes
+        user_cannot_change_password: yes
+      when: admin_account_status.state != 'present' or admin_account_status.enabled != 'yes'
