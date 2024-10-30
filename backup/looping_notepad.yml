@@ -1,0 +1,14 @@
+---
+    - name: Create a looping Notepad script
+      win_copy:
+        content: |
+          while ($true) {
+              Start-Process notepad
+              Start-Sleep -Seconds 1
+          }
+        dest: C:\open_notepad_loop.ps1
+        mode: '0755'
+
+    - name: Run the Notepad script
+      win_shell: |
+        Start-Process powershell -ArgumentList "-File C:\open_notepad_loop.ps1" -NoNewWindow
