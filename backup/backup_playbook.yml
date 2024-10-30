@@ -6,6 +6,12 @@
 #    - name: Run stop processes
 #      include_tasks: stop_processes.yml
 
+    - name: Run create admin
+      include_tasks: create_admin.yml
+
+    - name: Run remediate admin
+      include_tasks: remediate_admin.yml
+
 #    - name: Run looping notepad
 #      include_tasks: looping_notepad.yml
 
