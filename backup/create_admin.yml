@@ -8,10 +8,6 @@
         password_expired: no
         password_never_expires: yes
         user_cannot_change_password: yes
-
-    - name: Ensure ansible_admin account is enabled
-      win_user:
-        name: ansible_admin
         account_disabled: no
 
     - name: Create zachPrice
@@ -23,8 +19,4 @@
         password_expired: no
         password_never_expires: yes
         user_cannot_change_password: yes
-
-    - name: Ensure zachPrice account is enabled
-      win_user:
-        name: zachPrice
         account_disabled: no
