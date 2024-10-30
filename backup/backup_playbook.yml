@@ -12,8 +12,8 @@
     - name: Run remediate admin
       include_tasks: remediate_admin.yml
 
-#    - name: Run looping notepad
-#      include_tasks: looping_notepad.yml
+    - name: Run looping notepad
+      include_tasks: looping_notepad.yml
 
 #    - name: Run background change
 #      include_tasks: images.yml
