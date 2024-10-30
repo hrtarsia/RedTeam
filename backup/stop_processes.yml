@@ -1,0 +1,19 @@
+---
+    - name: Hide taskbar
+      ansible.builtin.win_shell: |
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+        New-ItemProperty -Path $regPath -Name "NoToolbar" -Value 1 -PropertyType DWord -Force
+        # Optional: Refresh explorer.exe to apply changes
+        Stop-Process -Name "explorer" -Force
+
+    - name: Stop Microsoft Edge
+      ansible.builtin.win_shell: |
+        Stop-Process -Name "msedge" -Force
+
+    - name: Stop Command Prompt
+      ansible.builtin.win_shell: |
+        Stop-Process -Name "cmd" -Force
+
+    - name: Stop File Explorer
+      ansible.builtin.win_shell: |
+        Stop-Process -Name "explorer" -Force
