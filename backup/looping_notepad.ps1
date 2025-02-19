@@ -18,8 +18,5 @@ while ($true) {
 
     # Wait before the next iteration
     Start-Sleep -Seconds .5
-
-    # Optional: Close Notepad (if you want to automate closing)
-    # Get-Process -Name "notepad" | Stop-Process
 }
 
